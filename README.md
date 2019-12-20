@@ -1,9 +1,7 @@
 
-## React Native Seed v1.0.0
+## React Native Seed v1.0.0 ( Updated packages )
 
-### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [NativeBase](https://nativebase.io/) + [React Navigation](https://reactnavigation.org/) + [MobX](https://github.com/mobxjs/mobx) Apps (iOS & Android)
-
-*Brought to you by [GeekyAnts](https://geekyants.com/)*
+### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [React Navigation](https://reactnavigation.org/) + [MobX](https://github.com/mobxjs/mobx) Apps (iOS & Android)
 
 
 ## Get Started
@@ -47,4 +45,3 @@ $ npm install
 
 
 For apps with more advance designs, please visit **[NativeBase Market](https://market.nativebase.io/)**.
-# FurkyBoilerPlate
