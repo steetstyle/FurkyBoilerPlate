@@ -18,9 +18,9 @@
 On the command prompt run the following commands
 
 ```sh
-$ git clone https://github.com/GeekyAnts/react-native-boilerplate-mobx-flow.git
+$ git clone https://github.com/steetstyle/FurkyBoilerPlate.git
 
-$ cd react-native-boilerplate-mobx-flow/
+$ cd furky-boiler-plate/
 
 $ npm install
   or
