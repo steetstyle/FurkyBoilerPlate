@@ -45,14 +45,14 @@ $ npm install
 
 
 
-### Change Transistion File ComponentWillReceiveProps Function
+### Change node_modules/react-navigation-stack/dist/views/Transistioner.js File ComponentWillReceiveProps Function
 	// eslint-disable-next-line react/no-deprecated
-  componentDidUpdate(prevProps) {
-    let nextScenes = NavigationScenesReducer(this.state.scenes, this.props.navigation.state, prevProps.navigation.state, this.props.descriptors);
-    let _currentprops = this.props;
-    if (!_currentprops.navigation.state.isTransitioning) {
-      nextScenes = filterStale(nextScenes);
-    }
+	  componentDidUpdate(prevProps) {
+	    let nextScenes = NavigationScenesReducer(this.state.scenes, this.props.navigation.state, prevProps.navigation.state, this.props.descriptors);
+	    let _currentprops = this.props;
+	    if (!_currentprops.navigation.state.isTransitioning) {
+	      nextScenes = filterStale(nextScenes);
+	    }
 
     // Update nextScenes when we change screenProps
     // This is a workaround for https://github.com/react-navigation/react-navigation/issues/4271
@@ -74,13 +74,13 @@ $ npm install
     }
   }
 
-  _startTransition(nextProps, nextScenes, indexHasChanged) {
-    const nextState = {
-      ...this.state,
-      scenes: nextScenes,
-    };
-    nextProps = this.props;
-    const { position, progress } = nextState; 
+	  _startTransition(nextProps, nextScenes, indexHasChanged) {
+	    const nextState = {
+	      ...this.state,
+	      scenes: nextScenes,
+	    };
+	    nextProps = this.props;
+	    const { position, progress } = nextState; 
 
     progress.setValue(0);
 
