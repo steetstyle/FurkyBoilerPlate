@@ -45,7 +45,7 @@ $ npm install
 
 
 
-### Change node_modules/react-navigation-stack/dist/views/Transistioner.js File ComponentWillReceiveProps Function
+###  after npm install  for   deprecated ComponentWillReceiveProps warning Change node_modules/react-navigation-stack/dist/views/Transistioner.js ---> ComponentWillReceiveProps Function
 	// eslint-disable-next-line react/no-deprecated
 	  componentDidUpdate(prevProps) {
 	    let nextScenes = NavigationScenesReducer(this.state.scenes, this.props.navigation.state, prevProps.navigation.state, this.props.descriptors);
