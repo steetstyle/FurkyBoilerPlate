@@ -72,7 +72,7 @@ $ npm install
     if (_currentprops !== undefined) {
       this._startTransition(_currentprops, nextScenes, indexHasChanged);
     }
-  }
+  	}
 
 	  _startTransition(nextProps, nextScenes, indexHasChanged) {
 	    const nextState = {
@@ -136,4 +136,4 @@ $ npm install
       }
       Animated.parallel(animations).start(this._onTransitionEnd);
     });
-  }
+  	}
