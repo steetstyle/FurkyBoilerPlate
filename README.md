@@ -1,6 +1,4 @@
 
-## React Native Seed v1.0.0
-
 ### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [NativeBase](https://nativebase.io/) + [React Navigation](https://reactnavigation.org/) + [MobX](https://github.com/mobxjs/mobx) Apps (iOS & Android)
 
 *Brought to you by [GeekyAnts](https://geekyants.com/)*
@@ -46,4 +44,96 @@ $ npm install
 		*	Run `npm run android` in your terminal
 
 
-For apps with more advance designs, please visit **[NativeBase Market](https://market.nativebase.io/)**.
+
+### Change Transistion File ComponentWillReceiveProps Function
+	// eslint-disable-next-line react/no-deprecated
+  componentDidUpdate(prevProps) {
+    let nextScenes = NavigationScenesReducer(this.state.scenes, this.props.navigation.state, prevProps.navigation.state, this.props.descriptors);
+    let _currentprops = this.props;
+    if (!_currentprops.navigation.state.isTransitioning) {
+      nextScenes = filterStale(nextScenes);
+    }
+
+    // Update nextScenes when we change screenProps
+    // This is a workaround for https://github.com/react-navigation/react-navigation/issues/4271
+    if (_currentprops.screenProps !== prevProps.screenProps) {
+      this.setState({ nextScenes });
+    }
+
+    if (nextScenes === this.state.scenes) {
+      return;
+    }
+
+    const indexHasChanged =
+      _currentprops.navigation.state.index !== prevProps.navigation.state.index;
+    if (this._isTransitionRunning) {
+      this._queuedTransition = { _currentprops, nextScenes, indexHasChanged };
+    }
+    if (_currentprops !== undefined) {
+      this._startTransition(_currentprops, nextScenes, indexHasChanged);
+    }
+  }
+
+  _startTransition(nextProps, nextScenes, indexHasChanged) {
+    const nextState = {
+      ...this.state,
+      scenes: nextScenes,
+    };
+    nextProps = this.props;
+    const { position, progress } = nextState; 
+
+    progress.setValue(0);
+
+    this._prevTransitionProps = this._transitionProps;
+    this._transitionProps = buildTransitionProps(nextProps, nextState);
+
+    const toValue = nextProps.navigation.state.index;
+
+    if (!this._transitionProps.navigation.state.isTransitioning) {
+      this.setState(nextState, async () => {
+        const result = nextProps.onTransitionStart(this._transitionProps, this._prevTransitionProps);
+        if (result instanceof Promise) {
+          await result;
+        }
+        progress.setValue(1);
+        position.setValue(toValue);
+        this._onTransitionEnd();
+      });
+      return;
+    }
+
+    // get the transition spec.
+    const transitionUserSpec = nextProps.configureTransition ? nextProps.configureTransition(this._transitionProps, this._prevTransitionProps) : null;
+
+    const transitionSpec = {
+      ...DefaultTransitionSpec,
+      ...transitionUserSpec
+    };
+
+    const { timing } = transitionSpec;
+    delete transitionSpec.timing;
+
+    const positionHasChanged = position.__getValue() !== toValue;
+
+    // if swiped back, indexHasChanged == true && positionHasChanged == false
+    const animations = indexHasChanged && positionHasChanged ? [timing(progress, {
+      ...transitionSpec,
+      toValue: 1
+    }), timing(position, {
+      ...transitionSpec,
+      toValue: nextProps.navigation.state.index
+    })] : [];
+
+    // update scenes and play the transition
+    this._isTransitionRunning = true;
+    this.setState(nextState, async () => {
+      if (nextProps.onTransitionStart) {
+        const result = nextProps.onTransitionStart(this._transitionProps, this._prevTransitionProps);
+
+        if (result instanceof Promise) {
+          await result;
+        }
+      }
+      Animated.parallel(animations).start(this._onTransitionEnd);
+    });
+  }
