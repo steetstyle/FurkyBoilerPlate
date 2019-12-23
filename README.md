@@ -1,7 +1,7 @@
 
-### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [React Navigation](https://reactnavigation.org/) + [MobX](https://github.com/mobxjs/mobx) Apps (iOS & Android)
+UPDATED VERSION of the  REACT NATIVE SEED 
 
-*Brought to you by [GeekyAnts](https://geekyants.com/)*
+### A [React Native](https://facebook.github.io/react-native/docs/getting-started.html) Starter Kit with [React Navigation](https://reactnavigation.org/) + [MobX](https://github.com/mobxjs/mobx) Apps (iOS & Android)
 
 
 ## Get Started
