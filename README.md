@@ -15,12 +15,8 @@ UPDATED VERSION of the  REACT NATIVE SEED
 
 ### 2. Installation
 
-On the command prompt run the following commands
+cd the downladed repo On the command prompt run the following commands 
 
-```sh
-$ git clone https://github.com/steetstyle/FurkyBoilerPlate.git
-
-$ cd furky-boiler-plate/
 
 $ npm install
   or
